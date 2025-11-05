@@ -1,0 +1,8 @@
+{
+  "name": "Health AI Assistant",
+  "description": "An AI-powered assistant to help you check symptoms and track your health patterns over time with insightful analysis and visualizations.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ]
+}

@@ -1,0 +1,174 @@
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { Diagnosis, GeolocationData } from '../types';
+import { getDiagnosis } from '../services/geminiService';
+import { Icon } from './common/Icon';
+
+const SymptomChecker: React.FC = () => {
+  const [symptoms, setSymptoms] = useState<string>('');
+  const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [geolocation, setGeolocation] = useState<GeolocationData | null>(null);
+  
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setGeolocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (err) => {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+        setError("Could not get location. Local healthcare suggestions will be generic.");
+      }
+    );
+  }, []);
+
+  const handleMicClick = () => {
+    if (isRecording) {
+      // In a real app, you would stop the recording here.
+      setIsRecording(false);
+    } else {
+      // In a real app, you would start recording and transcription here.
+      setIsRecording(true);
+      setSymptoms('Simulated voice input: I have a headache and a fever.');
+      // Simulate stopping after a few seconds
+      setTimeout(() => setIsRecording(false), 3000);
+    }
+  };
+
+  const handleSubmit = useCallback(async (e?: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+    if (!symptoms.trim() || isLoading) return;
+
+    setIsLoading(true);
+    setError(null);
+    setDiagnosis(null);
+
+    try {
+      const result = await getDiagnosis(symptoms, geolocation);
+      setDiagnosis(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [symptoms, geolocation, isLoading]);
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+        <h2 className="text-xl font-semibold text-slate-700 mb-4">Describe Your Symptoms</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="relative">
+            <textarea
+              value={symptoms}
+              onChange={(e) => setSymptoms(e.target.value)}
+              placeholder="e.g., 'I have a sore throat, a slight fever, and a cough...'"
+              className="w-full h-32 p-4 pr-16 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              disabled={isLoading || isRecording}
+            />
+            <button
+              type="button"
+              onClick={handleMicClick}
+              className={`absolute top-3 right-3 p-2 rounded-full transition ${
+                isRecording ? 'bg-red-500 text-white animate-pulse' : 'bg-blue-500 text-white hover:bg-blue-600'
+              }`}
+              disabled={isLoading}
+              aria-label={isRecording ? 'Stop recording' : 'Start recording'}
+            >
+              <Icon name="microphone" className="w-5 h-5" />
+            </button>
+          </div>
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-slate-400 disabled:cursor-not-allowed transition"
+            disabled={isLoading || !symptoms.trim()}
+          >
+            {isLoading ? (
+              <>
+                <Icon name="loader" className="w-5 h-5 animate-spin" />
+                Analyzing...
+              </>
+            ) : (
+              <>
+                <Icon name="sparkles" className="w-5 h-5" />
+                Get AI Analysis
+              </>
+            )}
+          </button>
+        </form>
+      </div>
+
+      {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert">{error}</div>}
+      
+      {isLoading && <LoadingSkeleton />}
+
+      {diagnosis && <DiagnosisDisplay diagnosis={diagnosis} />}
+    </div>
+  );
+};
+
+const LoadingSkeleton = () => (
+    <div className="animate-pulse space-y-6">
+        <div className="bg-slate-200 h-8 w-1/3 rounded-md"></div>
+        <div className="space-y-4 bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+            <div className="h-6 bg-slate-200 rounded w-3/4"></div>
+            <div className="h-4 bg-slate-200 rounded w-full"></div>
+            <div className="h-4 bg-slate-200 rounded w-5/6"></div>
+        </div>
+         <div className="space-y-4 bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+            <div className="h-6 bg-slate-200 rounded w-3/4"></div>
+            <div className="h-4 bg-slate-200 rounded w-full"></div>
+            <div className="h-4 bg-slate-200 rounded w-5/6"></div>
+        </div>
+    </div>
+);
+
+const DiagnosisDisplay: React.FC<{ diagnosis: Diagnosis }> = ({ diagnosis }) => (
+  <div className="space-y-8">
+    <div>
+        <h3 className="text-xl font-semibold text-slate-700 mb-4 flex items-center gap-2">
+            <Icon name="clipboard" className="w-6 h-6 text-blue-600"/>
+            Possible Causes
+        </h3>
+        <div className="space-y-4">
+        {diagnosis.possible_causes.map((item, index) => (
+            <div key={index} className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+            <div className="flex justify-between items-start mb-2">
+                <h4 className="text-lg font-semibold text-blue-700">{item.cause}</h4>
+                <span className="text-sm font-bold text-slate-600 bg-blue-100 px-3 py-1 rounded-full">{item.confidence}% Confidence</span>
+            </div>
+            <div className="w-full bg-slate-200 rounded-full h-2.5 mb-4">
+                <div className="bg-blue-500 h-2.5 rounded-full" style={{ width: `${item.confidence}%` }}></div>
+            </div>
+            <p className="text-slate-600"><strong className="font-semibold text-slate-700">Suggested Treatment:</strong> {item.suggested_treatment}</p>
+            </div>
+        ))}
+        </div>
+    </div>
+
+    {diagnosis.local_healthcare_options.length > 0 && (
+      <div>
+        <h3 className="text-xl font-semibold text-slate-700 mb-4 flex items-center gap-2">
+            <Icon name="location" className="w-6 h-6 text-green-600"/>
+            Local Healthcare Options
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {diagnosis.local_healthcare_options.map((option, index) => (
+            <div key={index} className="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+            <h4 className="font-semibold text-green-800">{option.name}</h4>
+            <p className="text-sm text-slate-500">{option.type}</p>
+            <p className="text-sm text-slate-600 mt-1">{option.address}</p>
+            </div>
+        ))}
+        </div>
+      </div>
+    )}
+  </div>
+);
+
+export default SymptomChecker;
