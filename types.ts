@@ -28,3 +28,9 @@ export interface GeolocationData {
     latitude: number;
     longitude: number;
 }
+
+export interface Demographics {
+    age: number | null;
+    gender: string;
+    ethnicity: string;
+}

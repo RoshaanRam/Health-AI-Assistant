@@ -1,6 +1,6 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
-import { Diagnosis, GeolocationData, HealthLog } from "../types";
+import { Diagnosis, GeolocationData, HealthLog, Demographics } from "../types";
 
 const API_KEY = process.env.API_KEY;
 
@@ -41,14 +41,25 @@ const diagnosisSchema = {
     required: ['possible_causes', 'local_healthcare_options'],
 };
 
-export const getDiagnosis = async (symptoms: string, location: GeolocationData | null): Promise<Diagnosis> => {
+export const getDiagnosis = async (symptoms: string, location: GeolocationData | null, demographics: Demographics): Promise<Diagnosis> => {
     const locationInfo = location ? `The user is currently near latitude ${location.latitude} and longitude ${location.longitude}.` : "The user's location is not available.";
     
+    let demographicsInfo = 'The user has not provided demographic information.';
+    const parts = [];
+    if (demographics.age) parts.push(`Age: ${demographics.age}`);
+    if (demographics.gender && demographics.gender !== 'Prefer not to say' && demographics.gender !== '') parts.push(`Gender: ${demographics.gender}`);
+    if (demographics.ethnicity && demographics.ethnicity !== 'Prefer not to say' && demographics.ethnicity !== '') parts.push(`Ethnicity: ${demographics.ethnicity}`);
+    
+    if (parts.length > 0) {
+        demographicsInfo = `The user's demographic profile is: ${parts.join(', ')}. Certain conditions can be more prevalent in specific demographic groups, so consider this information in your analysis.`;
+    }
+
     const prompt = `
         You are an advanced AI medical assistant. A user has reported the following symptoms: "${symptoms}".
+        ${demographicsInfo}
         ${locationInfo}
         
-        Based on this information, please provide a structured analysis including:
+        Based on all this information, please provide a structured analysis including:
         1. A list of possible causes, each with a confidence score (0-100) and a brief, clear suggested treatment plan.
         2. A list of 3-4 relevant local healthcare options (like clinics, hospitals, or pharmacies) if the location is known. If the location is not available, provide generic advice on finding local care.
         

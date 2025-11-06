@@ -1,11 +1,14 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Diagnosis, GeolocationData } from '../types';
+import { Diagnosis, GeolocationData, Demographics } from '../types';
 import { getDiagnosis } from '../services/geminiService';
 import { Icon } from './common/Icon';
 
 const SymptomChecker: React.FC = () => {
   const [symptoms, setSymptoms] = useState<string>('');
+  const [age, setAge] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [ethnicity, setEthnicity] = useState<string>('');
   const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -48,18 +51,78 @@ const SymptomChecker: React.FC = () => {
     setError(null);
     setDiagnosis(null);
 
+    const demographics: Demographics = {
+        age: age ? parseInt(age, 10) : null,
+        gender,
+        ethnicity,
+    };
+
     try {
-      const result = await getDiagnosis(symptoms, geolocation);
+      const result = await getDiagnosis(symptoms, geolocation, demographics);
       setDiagnosis(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred.');
     } finally {
       setIsLoading(false);
     }
-  }, [symptoms, geolocation, isLoading]);
+  }, [symptoms, geolocation, isLoading, age, gender, ethnicity]);
 
   return (
     <div className="flex flex-col gap-8">
+      <div className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+        <h2 className="text-xl font-semibold text-slate-700 mb-4">Patient Information</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label htmlFor="age" className="block text-sm font-medium text-slate-600 mb-1">Age</label>
+                <input
+                    type="number"
+                    id="age"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    disabled={isLoading}
+                    min="0"
+                    placeholder="e.g., 35"
+                />
+            </div>
+            <div>
+                <label htmlFor="gender" className="block text-sm font-medium text-slate-600 mb-1">Gender</label>
+                <select
+                    id="gender"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    disabled={isLoading}
+                >
+                    <option value="">Select...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+            <div>
+                <label htmlFor="ethnicity" className="block text-sm font-medium text-slate-600 mb-1">Ethnicity</label>
+                <select
+                    id="ethnicity"
+                    value={ethnicity}
+                    onChange={(e) => setEthnicity(e.target.value)}
+                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    disabled={isLoading}
+                >
+                    <option value="">Select...</option>
+                    <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+                    <option value="Asian">Asian</option>
+                    <option value="Black or African American">Black or African American</option>
+                    <option value="Hispanic or Latino">Hispanic or Latino</option>
+                    <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+                    <option value="White">White</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+        </div>
+      </div>
       <div className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
         <h2 className="text-xl font-semibold text-slate-700 mb-4">Describe Your Symptoms</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
