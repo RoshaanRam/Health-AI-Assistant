@@ -1,5 +1,50 @@
+// FIX: Add type declarations for the Web Speech API to resolve TypeScript errors.
+// The SpeechRecognition API is not part of standard DOM typings.
+interface SpeechRecognitionResult {
+  readonly isFinal: boolean;
+  readonly [index: number]: SpeechRecognitionAlternative;
+  readonly length: number;
+}
 
-import React, { useState, useEffect, useCallback } from 'react';
+interface SpeechRecognitionAlternative {
+  readonly transcript: string;
+  readonly confidence: number;
+}
+
+interface SpeechRecognitionResultList {
+  readonly [index: number]: SpeechRecognitionResult;
+  readonly length: number;
+}
+
+interface SpeechRecognitionEvent extends Event {
+  readonly resultIndex: number;
+  readonly results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  readonly error: string;
+}
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  onresult: (event: SpeechRecognitionEvent) => void;
+  onerror: (event: SpeechRecognitionErrorEvent) => void;
+  onstart: () => void;
+  onend: () => void;
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition: { new(): SpeechRecognition };
+    webkitSpeechRecognition: { new(): SpeechRecognition };
+  }
+}
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Diagnosis, GeolocationData, Demographics } from '../types';
 import { getDiagnosis } from '../services/geminiService';
 import { Icon } from './common/Icon';
@@ -14,7 +59,9 @@ const SymptomChecker: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [geolocation, setGeolocation] = useState<GeolocationData | null>(null);
-  
+  const [speechSupported, setSpeechSupported] = useState<boolean>(false);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -30,16 +77,55 @@ const SymptomChecker: React.FC = () => {
     );
   }, []);
 
-  const handleMicClick = () => {
-    if (isRecording) {
-      // In a real app, you would stop the recording here.
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      console.warn("Speech recognition not supported by this browser.");
+      setSpeechSupported(false);
+      return;
+    }
+    setSpeechSupported(true);
+
+    const recognition = new SpeechRecognition();
+    recognitionRef.current = recognition;
+
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event) => {
+      let newTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          newTranscript += event.results[i][0].transcript;
+        }
+      }
+      if (newTranscript) {
+        setSymptoms(prevSymptoms => (prevSymptoms ? prevSymptoms.trim() + ' ' : '') + newTranscript.trim());
+      }
+    };
+
+    recognition.onstart = () => setIsRecording(true);
+    recognition.onend = () => setIsRecording(false);
+    recognition.onerror = (event) => {
+      console.error('Speech Recognition Error', event.error);
+      setError(`Speech recognition error: ${event.error}. Please ensure microphone access is granted.`);
       setIsRecording(false);
+    };
+
+    return () => {
+      recognition.stop();
+    };
+  }, [setError]);
+
+  const handleMicClick = () => {
+    const recognition = recognitionRef.current;
+    if (!recognition) return;
+
+    if (isRecording) {
+      recognition.stop();
     } else {
-      // In a real app, you would start recording and transcription here.
-      setIsRecording(true);
-      setSymptoms('Simulated voice input: I have a headache and a fever.');
-      // Simulate stopping after a few seconds
-      setTimeout(() => setIsRecording(false), 3000);
+      recognition.start();
     }
   };
 
@@ -132,16 +218,17 @@ const SymptomChecker: React.FC = () => {
               onChange={(e) => setSymptoms(e.target.value)}
               placeholder="e.g., 'I have a sore throat, a slight fever, and a cough...'"
               className="w-full h-32 p-4 pr-16 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-              disabled={isLoading || isRecording}
+              disabled={isLoading}
             />
             <button
               type="button"
               onClick={handleMicClick}
               className={`absolute top-3 right-3 p-2 rounded-full transition ${
                 isRecording ? 'bg-red-500 text-white animate-pulse' : 'bg-blue-500 text-white hover:bg-blue-600'
-              }`}
-              disabled={isLoading}
+              } disabled:bg-slate-400 disabled:cursor-not-allowed`}
+              disabled={isLoading || !speechSupported}
               aria-label={isRecording ? 'Stop recording' : 'Start recording'}
+              title={!speechSupported ? "Voice input not supported in your browser" : (isRecording ? "Stop recording" : "Start recording")}
             >
               <Icon name="microphone" className="w-5 h-5" />
             </button>
