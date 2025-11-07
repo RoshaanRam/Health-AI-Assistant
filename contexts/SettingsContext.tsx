@@ -7,13 +7,38 @@ interface ThemeConfig {
   hue: number;
   saturation: string;
   lightness: string;
+  backgroundImage: string;
 }
 
 export const themes: Record<Theme, ThemeConfig> = {
-  Blue: { name: 'Blue', hue: 217, saturation: '91%', lightness: '60%' },
-  Green: { name: 'Green', hue: 142, saturation: '71%', lightness: '45%' },
-  Purple: { name: 'Purple', hue: 262, saturation: '85%', lightness: '60%' },
-  Orange: { name: 'Orange', hue: 25, saturation: '95%', lightness: '55%' },
+  Blue: { 
+    name: 'Blue', 
+    hue: 217, 
+    saturation: '91%', 
+    lightness: '60%',
+    backgroundImage: 'url("https://img.freepik.com/free-vector/monochrome-realistic-liquid-effect-background_474888-7310.jpg?semt=ais_hybrid&w=740&q=80")'
+  },
+  Green: { 
+    name: 'Green', 
+    hue: 142, 
+    saturation: '71%', 
+    lightness: '45%',
+    backgroundImage: 'url("https://img.freepik.com/free-vector/abstract-modern-background-paper-cut-background-vector-illustration_474888-6855.jpg?semt=ais_hybrid&w=740&q=80")'
+  },
+  Purple: { 
+    name: 'Purple', 
+    hue: 262, 
+    saturation: '85%', 
+    lightness: '60%',
+    backgroundImage: 'url("https://img.freepik.com/free-vector/dynamic-shiny-wavy-purplish-background_1017-36772.jpg?w=1380")'
+  },
+  Orange: { 
+    name: 'Orange', 
+    hue: 25, 
+    saturation: '95%', 
+    lightness: '55%',
+    backgroundImage: 'url("https://img.freepik.com/free-vector/smooth-orange-wavy-background_52683-59128.jpg?w=1380")'
+  },
 };
 
 interface SettingsContextProps {
@@ -46,6 +71,7 @@ export const SettingsProvider: React.FC<{children: React.ReactNode}> = ({ childr
     root.style.setProperty('--primary-hue', selectedTheme.hue.toString());
     root.style.setProperty('--primary-saturation', selectedTheme.saturation);
     root.style.setProperty('--primary-lightness', selectedTheme.lightness);
+    root.style.setProperty('--background-image', selectedTheme.backgroundImage);
 
     localStorage.setItem('theme', theme);
   }, [theme]);
