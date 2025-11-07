@@ -1,48 +1,35 @@
 import React from 'react';
-import { Icon } from './common/Icon';
 import { useTranslations } from '../hooks/useTranslations';
 
-const InfoSection: React.FC<{icon: any, title: string, children: React.ReactNode}> = ({ icon, title, children }) => (
-    <div className="bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex items-start gap-4">
-        <div className="flex-shrink-0 bg-primary-light p-3 rounded-full">
-            <Icon name={icon} className="w-6 h-6 text-primary" />
-        </div>
-        <div>
-            <h3 className="text-lg font-semibold text-slate-800 mb-1">{title}</h3>
-            <div className="text-slate-600 space-y-2">{children}</div>
-        </div>
-    </div>
-);
-
 const AboutPage: React.FC = () => {
-  const { t } = useTranslations();
+    const { t } = useTranslations();
+
+  const InfoCard: React.FC<{ title: string; text: string; children?: React.ReactNode }> = ({ title, text, children }) => (
+    <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-themed-sm">
+      <h2 className="text-2xl font-bold text-slate-800 mb-3">{title}</h2>
+      <p className="text-slate-600 leading-relaxed">{text}</p>
+      {children}
+    </div>
+  );
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-slate-800 mb-2">{t('about.title')}</h2>
-        <p className="text-lg text-slate-600">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+          {t('about.title')}
+        </h1>
+        <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
           {t('about.subtitle')}
         </p>
       </div>
+      
+      <InfoCard title={t('about.missionTitle')} text={t('about.missionText')} />
+      
+      <InfoCard title={t('about.howItWorksTitle')} text={t('about.howItWorksText')} />
 
-      <div className="space-y-6">
-        <InfoSection icon="logo" title={t('about.missionTitle')}>
-          <p>
-            {t('about.missionText')}
-          </p>
-        </InfoSection>
-
-        <InfoSection icon="sparkles" title={t('about.howItWorksTitle')}>
-           <p>
-            {t('about.howItWorksText')}
-          </p>
-        </InfoSection>
-
-        <InfoSection icon="info" title={t('about.disclaimerTitle')}>
-            <p>
-                {t('about.disclaimerText')}
-            </p>
-        </InfoSection>
+      <div className="bg-red-50/80 backdrop-blur-sm border-l-4 border-red-500 text-red-800 p-6 rounded-xl shadow-sm" role="alert">
+         <h2 className="text-2xl font-bold mb-3">{t('about.disclaimerTitle')}</h2>
+         <p className="leading-relaxed">{t('about.disclaimerText')}</p>
       </div>
     </div>
   );

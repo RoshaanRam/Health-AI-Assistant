@@ -53,7 +53,7 @@ const AppContent: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent font-sans">
       <header
-        className="backdrop-blur-lg sticky top-0 z-10 shadow-sm"
+        className="backdrop-blur-lg sticky top-0 z-10 shadow-themed-sm"
         style={{ background: 'var(--navbar-background)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,8 +87,8 @@ const AppContent: React.FC = () => {
 
       {/* Mobile Navigation */}
       <nav
-        className="sm:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg shadow-[0_-2px_5px_rgba(0,0,0,0.05)] flex justify-around z-20"
-        style={{ background: 'var(--navbar-background)' }}
+        className="sm:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg flex justify-around z-20"
+        style={{ background: 'var(--navbar-background)', boxShadow: '0 -2px 5px var(--shadow-color)' }}
       >
           <NavButton targetView="home" icon="home" label={t('nav.home')} />
           <NavButton targetView="checker" icon="clipboard" label={t('nav.checkerShort')} />

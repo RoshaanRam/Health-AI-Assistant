@@ -32,14 +32,14 @@ export const themes: Record<Theme, ThemeConfig> = {
     hue: 262, 
     saturation: '85%', 
     lightness: '60%',
-    backgroundImage: 'url("https://img.freepik.com/free-vector/abstract-paper-style-purple-background-design_1017-34757.jpg")'
+    backgroundImage: 'url("https://papers.company/wallpaper/papers.co-vy76-wave-color-purple-pattern-background-36-3840x2400-4k-wallpaper.jpg")'
   },
   Orange: { 
     name: 'Orange', 
     hue: 25, 
     saturation: '95%', 
     lightness: '55%',
-    backgroundImage: 'url("https://img.freepik.com/free-vector/orange-fluid-background-frame_53876-99021.jpg")'
+    backgroundImage: 'url("https://img.freepik.com/free-vector/paper-style-smooth-background_23-2148980020.jpg?semt=ais_hybrid&w=740&q=80")'
   },
 };
 
