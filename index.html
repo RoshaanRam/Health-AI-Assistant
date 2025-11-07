@@ -29,17 +29,41 @@
     --primary-color-light: hsl(var(--primary-hue), var(--primary-saturation), 95%);
     --primary-color-dark: hsl(var(--primary-hue), var(--primary-saturation), 50%);
     --font-size-base: 16px;
-    --background-image: url("https://img.freepik.com/free-vector/monochrome-realistic-liquid-effect-background_474888-7310.jpg?semt=ais_hybrid&w=740&q=80");
+    --background-image: url("https://img.freepik.com/free-vector/monochrome-realistic-liquid-effect-background_474888-7310.jpg?w=740");
     font-family: 'Inter', sans-serif;
-  }
-  .accessibility-mode {
-    --font-size-base: 18px;
   }
   body {
     font-size: var(--font-size-base);
-    transition: background-color 0.5s ease;
+    transition: all 0.3s ease;
     background-color: hsl(var(--primary-hue), 20%, 98%);
   }
+  
+  /* Accessibility Mode Styles */
+  .accessibility-mode {
+    --font-size-base: 19px; /* Bigger */
+  }
+
+  /* Make text darker and bolder */
+  .accessibility-mode body,
+  .accessibility-mode .text-slate-800,
+  .accessibility-mode .text-slate-700,
+  .accessibility-mode .text-slate-600,
+  .accessibility-mode .text-slate-500 {
+    color: #020617; /* Darkest slate for high contrast */
+    font-weight: 500; /* Bolder */
+  }
+
+  /* Ensure headings and important text are even more prominent */
+  .accessibility-mode h1,
+  .accessibility-mode h2,
+  .accessibility-mode h3,
+  .accessibility-mode h4,
+  .accessibility-mode strong,
+  .accessibility-mode b {
+    color: #000000; /* Black for maximum contrast */
+    font-weight: 700; /* Bold */
+  }
+
   body::before {
     content: '';
     position: fixed;

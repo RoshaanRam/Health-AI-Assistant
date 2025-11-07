@@ -16,28 +16,28 @@ export const themes: Record<Theme, ThemeConfig> = {
     hue: 217, 
     saturation: '91%', 
     lightness: '60%',
-    backgroundImage: 'url("https://img.freepik.com/free-vector/monochrome-realistic-liquid-effect-background_474888-7310.jpg?semt=ais_hybrid&w=740&q=80")'
+    backgroundImage: 'url("https://img.freepik.com/free-vector/monochrome-realistic-liquid-effect-background_474888-7310.jpg?w=740")'
   },
   Green: { 
     name: 'Green', 
     hue: 142, 
     saturation: '71%', 
     lightness: '45%',
-    backgroundImage: 'url("https://img.freepik.com/free-vector/abstract-modern-background-paper-cut-background-vector-illustration_474888-6855.jpg?semt=ais_hybrid&w=740&q=80")'
+    backgroundImage: 'url("https://img.freepik.com/free-vector/abstract-modern-background-paper-cut-background-vector-illustration_474888-6855.jpg?w=740")'
   },
   Purple: { 
     name: 'Purple', 
     hue: 262, 
     saturation: '85%', 
     lightness: '60%',
-    backgroundImage: 'url("https://img.freepik.com/free-vector/dynamic-shiny-wavy-purplish-background_1017-36772.jpg?w=1380")'
+    backgroundImage: 'url("https://img.freepik.com/free-vector/abstract-paper-style-purple-background-design_1017-34757.jpg")'
   },
   Orange: { 
     name: 'Orange', 
     hue: 25, 
     saturation: '95%', 
     lightness: '55%',
-    backgroundImage: 'url("https://img.freepik.com/free-vector/smooth-orange-wavy-background_52683-59128.jpg?w=1380")'
+    backgroundImage: 'url("https://img.freepik.com/free-vector/orange-fluid-background-frame_53876-99021.jpg")'
   },
 };
 
