@@ -1,0 +1,27 @@
+.range-thumb-primary::-webkit-slider-thumb {
+  background-color: var(--primary-color);
+}
+
+.range-thumb-primary::-moz-range-thumb {
+  background-color: var(--primary-color);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.border-primary {
+  border-color: var(--primary-color);
+}
+
+.bg-primary-light {
+    background-color: var(--primary-color-light);
+}
+
+.text-primary-dark {
+    color: var(--primary-color-dark);
+}

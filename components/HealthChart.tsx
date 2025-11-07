@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -35,7 +34,7 @@ const HealthChart: React.FC<HealthChartProps> = ({ data }) => {
             }}
           />
           <Legend wrapperStyle={{fontSize: "14px"}}/>
-          <Line type="monotone" dataKey="severity" stroke="#3b82f6" strokeWidth={2} activeDot={{ r: 8 }} dot={{r: 4}} name="Symptom Severity" />
+          <Line type="monotone" dataKey="severity" stroke="var(--primary-color)" strokeWidth={2} activeDot={{ r: 8 }} dot={{r: 4, fill: 'var(--primary-color)'}} name="Symptom Severity" />
         </LineChart>
       </ResponsiveContainer>
     </div>

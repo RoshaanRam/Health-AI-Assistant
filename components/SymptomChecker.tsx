@@ -165,7 +165,7 @@ const SymptomChecker: React.FC = () => {
                     id="age"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
-                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition"
                     disabled={isLoading}
                     min="0"
                     placeholder="e.g., 35"
@@ -177,7 +177,7 @@ const SymptomChecker: React.FC = () => {
                     id="gender"
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition"
                     disabled={isLoading}
                 >
                     <option value="">Select...</option>
@@ -193,16 +193,22 @@ const SymptomChecker: React.FC = () => {
                     id="ethnicity"
                     value={ethnicity}
                     onChange={(e) => setEthnicity(e.target.value)}
-                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    className="w-full p-2 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition"
                     disabled={isLoading}
                 >
                     <option value="">Select...</option>
-                    <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
-                    <option value="Asian">Asian</option>
-                    <option value="Black or African American">Black or African American</option>
-                    <option value="Hispanic or Latino">Hispanic or Latino</option>
-                    <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
                     <option value="White">White</option>
+                    <option value="South Asian">South Asian</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Black">Black</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Latin American">Latin American</option>
+                    <option value="Arab">Arab</option>
+                    <option value="Southeast Asian">Southeast Asian</option>
+                    <option value="West Asian">West Asian</option>
+                    <option value="Korean">Korean</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Indigenous">Indigenous (First Nations, Métis, Inuit)</option>
                     <option value="Other">Other</option>
                     <option value="Prefer not to say">Prefer not to say</option>
                 </select>
@@ -217,14 +223,15 @@ const SymptomChecker: React.FC = () => {
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
               placeholder="e.g., 'I have a sore throat, a slight fever, and a cough...'"
-              className="w-full h-32 p-4 pr-16 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              className="w-full h-32 p-4 pr-16 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition"
               disabled={isLoading}
             />
             <button
               type="button"
               onClick={handleMicClick}
-              className={`absolute top-3 right-3 p-2 rounded-full transition ${
-                isRecording ? 'bg-red-500 text-white animate-pulse' : 'bg-blue-500 text-white hover:bg-blue-600'
+              style={{ backgroundColor: isRecording ? '#ef4444' : 'var(--primary-color)' }}
+              className={`absolute top-3 right-3 p-2 rounded-full text-white transition-colors duration-200 ${
+                isRecording ? 'animate-pulse' : 'hover:opacity-90'
               } disabled:bg-slate-400 disabled:cursor-not-allowed`}
               disabled={isLoading || !speechSupported}
               aria-label={isRecording ? 'Stop recording' : 'Start recording'}
@@ -235,7 +242,8 @@ const SymptomChecker: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-slate-400 disabled:cursor-not-allowed transition"
+            style={{ backgroundColor: 'var(--primary-color)' }}
+            className="w-full flex items-center justify-center gap-2 text-white font-semibold py-3 px-4 rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-slate-400 disabled:cursor-not-allowed transition"
             disabled={isLoading || !symptoms.trim()}
           >
             {isLoading ? (
@@ -282,18 +290,18 @@ const DiagnosisDisplay: React.FC<{ diagnosis: Diagnosis }> = ({ diagnosis }) => 
   <div className="space-y-8">
     <div>
         <h3 className="text-xl font-semibold text-slate-700 mb-4 flex items-center gap-2">
-            <Icon name="clipboard" className="w-6 h-6 text-blue-600"/>
+            <Icon name="clipboard" className="w-6 h-6 text-primary"/>
             Possible Causes
         </h3>
         <div className="space-y-4">
         {diagnosis.possible_causes.map((item, index) => (
             <div key={index} className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
             <div className="flex justify-between items-start mb-2">
-                <h4 className="text-lg font-semibold text-blue-700">{item.cause}</h4>
-                <span className="text-sm font-bold text-slate-600 bg-blue-100 px-3 py-1 rounded-full">{item.confidence}% Confidence</span>
+                <h4 className="text-lg font-semibold" style={{color: 'var(--primary-color-dark)'}}>{item.cause}</h4>
+                <span className="text-sm font-bold text-primary-dark bg-primary-light px-3 py-1 rounded-full">{item.confidence}% Confidence</span>
             </div>
             <div className="w-full bg-slate-200 rounded-full h-2.5 mb-4">
-                <div className="bg-blue-500 h-2.5 rounded-full" style={{ width: `${item.confidence}%` }}></div>
+                <div className="bg-primary h-2.5 rounded-full" style={{ width: `${item.confidence}%`, backgroundColor: 'var(--primary-color)' }}></div>
             </div>
             <p className="text-slate-600"><strong className="font-semibold text-slate-700">Suggested Treatment:</strong> {item.suggested_treatment}</p>
             </div>

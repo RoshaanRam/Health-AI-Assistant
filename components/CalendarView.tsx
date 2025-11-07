@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { HealthLog } from '../types';
 import { getHealthLogSummary } from '../services/geminiService';
@@ -67,12 +66,15 @@ const CalendarView: React.FC<CalendarViewProps> = ({ currentDate, setCurrentDate
               key={index}
               onClick={() => handleDateClick(date)}
               className={`relative h-24 p-2 border rounded-lg cursor-pointer transition ${
-                isCurrentMonth ? 'bg-white hover:bg-blue-50' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'
-              } ${isToday ? 'border-2 border-blue-500' : 'border-slate-200'}`}
+                isCurrentMonth ? 'bg-white hover:bg-primary-light' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'
+              } ${isToday ? 'border-2 border-primary' : 'border-slate-200'}`}
+              style={{
+                borderColor: isToday ? 'var(--primary-color)' : '',
+              }}
             >
-              <span className={`font-medium ${isToday ? 'text-blue-600' : ''}`}>{date.getDate()}</span>
+              <span className={`font-medium ${isToday ? 'text-primary' : ''}`} style={{color: isToday ? 'var(--primary-color)' : ''}}>{date.getDate()}</span>
               {log && (
-                <div className="absolute bottom-2 left-2 right-2 text-xs text-left p-1 bg-blue-100 text-blue-800 rounded truncate">
+                <div className="absolute bottom-2 left-2 right-2 text-xs text-left p-1 bg-primary-light text-primary-dark rounded truncate">
                   {log.summary}
                 </div>
               )}
@@ -140,13 +142,13 @@ const HealthLogModal: React.FC<HealthLogModalProps> = ({ date, healthLogs, onLog
                         value={logText}
                         onChange={(e) => setLogText(e.target.value)}
                         placeholder="How are you feeling today?"
-                        className="w-full h-32 p-3 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full h-32 p-3 text-slate-600 bg-slate-100 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary"
                     />
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-2">Symptom Severity (1: Mild - 10: Severe)</label>
                         <div className="flex items-center gap-4">
-                            <input type="range" min="1" max="10" value={severity} onChange={e => setSeverity(Number(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"/>
-                            <span className="font-bold text-blue-600 w-8 text-center">{severity}</span>
+                            <input type="range" min="1" max="10" value={severity} onChange={e => setSeverity(Number(e.target.value))} className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer range-thumb-primary"/>
+                            <span className="font-bold w-8 text-center" style={{color: 'var(--primary-color)'}}>{severity}</span>
                         </div>
                     </div>
                     <div className="flex justify-between items-center gap-4">
@@ -155,7 +157,7 @@ const HealthLogModal: React.FC<HealthLogModalProps> = ({ date, healthLogs, onLog
                        )}
                        <div className="flex-grow"></div>
                        <button onClick={onClose} className="px-4 py-2 bg-slate-200 text-slate-800 rounded-lg hover:bg-slate-300">Cancel</button>
-                        <button onClick={handleSave} disabled={isSaving} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-slate-400 flex items-center gap-2">
+                        <button onClick={handleSave} disabled={isSaving} className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 disabled:bg-slate-400 flex items-center gap-2" style={{backgroundColor: 'var(--primary-color)'}}>
                            {isSaving ? <><Icon name="loader" className="w-5 h-5 animate-spin"/> Saving...</> : 'Save Log'}
                         </button>
                     </div>
