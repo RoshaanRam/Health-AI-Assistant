@@ -1,6 +1,6 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { Diagnosis, GeolocationData, HealthLog, Demographics } from "../types";
+import { LanguageCode, languages } from "../translations";
 
 const API_KEY = process.env.API_KEY;
 
@@ -41,7 +41,7 @@ const diagnosisSchema = {
     required: ['possible_causes', 'local_healthcare_options'],
 };
 
-export const getDiagnosis = async (symptoms: string, location: GeolocationData | null, demographics: Demographics): Promise<Diagnosis> => {
+export const getDiagnosis = async (symptoms: string, location: GeolocationData | null, demographics: Demographics, language: LanguageCode): Promise<Diagnosis> => {
     const locationInfo = location ? `The user is currently near latitude ${location.latitude} and longitude ${location.longitude}.` : "The user's location is not available.";
     
     let demographicsInfo = 'The user has not provided demographic information.';
@@ -54,6 +54,7 @@ export const getDiagnosis = async (symptoms: string, location: GeolocationData |
         demographicsInfo = `The user's demographic profile is: ${parts.join(', ')}. Certain conditions can be more prevalent in specific demographic groups, so consider this information in your analysis.`;
     }
 
+    const languageName = languages[language];
     const prompt = `
         You are an advanced AI medical assistant. A user has reported the following symptoms: "${symptoms}".
         ${demographicsInfo}
@@ -63,6 +64,7 @@ export const getDiagnosis = async (symptoms: string, location: GeolocationData |
         1. A list of possible causes, each with a confidence score (0-100) and a brief, clear suggested treatment plan.
         2. A list of 3-4 relevant local healthcare options (like clinics, hospitals, or pharmacies) if the location is known. If the location is not available, provide generic advice on finding local care.
         
+        IMPORTANT: Your entire response, including all text in the final JSON output, must be in ${languageName}.
         Return the response in a JSON format matching the provided schema.
     `;
 
@@ -85,10 +87,13 @@ export const getDiagnosis = async (symptoms: string, location: GeolocationData |
     }
 };
 
-export const getHealthLogSummary = async (log: string): Promise<string> => {
+export const getHealthLogSummary = async (log: string, language: LanguageCode): Promise<string> => {
+    const languageName = languages[language];
     const prompt = `Summarize the following health log entry into a short, one-sentence summary for a calendar view. Start the summary with a relevant emoji.
     
     Log: "${log}"
+    
+    IMPORTANT: The summary must be in ${languageName}.
     
     Summary:`;
 
@@ -104,8 +109,9 @@ export const getHealthLogSummary = async (log: string): Promise<string> => {
     }
 };
 
-export const getHealthAnalysis = async (logs: HealthLog[]): Promise<string> => {
+export const getHealthAnalysis = async (logs: HealthLog[], language: LanguageCode): Promise<string> => {
     const formattedLogs = logs.map(l => `Date: ${l.date}, Log: ${l.log}, Severity: ${l.symptomSeverity}/10`).join('\n');
+    const languageName = languages[language];
     
     const prompt = `
         You are a helpful AI health analysis assistant. Analyze the following health logs from a user.
@@ -114,6 +120,8 @@ export const getHealthAnalysis = async (logs: HealthLog[]): Promise<string> => {
         ${formattedLogs}
         
         Based on these logs, identify potential trends, patterns, and correlations. Provide a concise analysis and actionable insights. For example, mention if certain symptoms appear cyclically or if there's a general trend of improvement or decline. Frame your response in a helpful and supportive tone.
+        
+        IMPORTANT: Your entire analysis must be in ${languageName}.
     `;
 
     try {

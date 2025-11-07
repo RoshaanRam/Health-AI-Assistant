@@ -28,6 +28,8 @@
     --primary-color: hsl(var(--primary-hue), var(--primary-saturation), var(--primary-lightness));
     --primary-color-light: hsl(var(--primary-hue), var(--primary-saturation), 95%);
     --primary-color-dark: hsl(var(--primary-hue), var(--primary-saturation), 50%);
+    --page-background-color: hsl(var(--primary-hue), var(--primary-saturation), 98%); /* A very light version of the theme color for the background */
+    --navbar-background: linear-gradient(to bottom, hsla(var(--primary-hue), var(--primary-saturation), 98%, 0.85), hsla(var(--primary-hue), var(--primary-saturation), 92%, 0.85));
     --font-size-base: 16px;
     --background-image: url("https://img.freepik.com/free-vector/monochrome-realistic-liquid-effect-background_474888-7310.jpg?w=740");
     font-family: 'Inter', sans-serif;
@@ -35,31 +37,31 @@
   body {
     font-size: var(--font-size-base);
     transition: all 0.3s ease;
-    background-color: hsl(var(--primary-hue), 20%, 98%);
+    background-color: var(--page-background-color);
   }
   
   /* Accessibility Mode Styles */
-  .accessibility-mode {
+  body.accessibility-mode {
     --font-size-base: 19px; /* Bigger */
   }
 
   /* Make text darker and bolder */
-  .accessibility-mode body,
-  .accessibility-mode .text-slate-800,
-  .accessibility-mode .text-slate-700,
-  .accessibility-mode .text-slate-600,
-  .accessibility-mode .text-slate-500 {
+  body.accessibility-mode,
+  body.accessibility-mode .text-slate-800,
+  body.accessibility-mode .text-slate-700,
+  body.accessibility-mode .text-slate-600,
+  body.accessibility-mode .text-slate-500 {
     color: #020617; /* Darkest slate for high contrast */
     font-weight: 500; /* Bolder */
   }
 
   /* Ensure headings and important text are even more prominent */
-  .accessibility-mode h1,
-  .accessibility-mode h2,
-  .accessibility-mode h3,
-  .accessibility-mode h4,
-  .accessibility-mode strong,
-  .accessibility-mode b {
+  body.accessibility-mode h1,
+  body.accessibility-mode h2,
+  body.accessibility-mode h3,
+  body.accessibility-mode h4,
+  body.accessibility-mode strong,
+  body.accessibility-mode b {
     color: #000000; /* Black for maximum contrast */
     font-weight: 700; /* Bold */
   }
@@ -78,9 +80,36 @@
     opacity: 0.15;
     transition: opacity 0.5s ease;
   }
+
+  /* Page Transitions */
+  @keyframes page-transition {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .page-enter-active {
+    animation: page-transition 0.4s ease-out forwards;
+  }
+
+  /* Shimmering Loading Skeleton */
+  @keyframes shimmer-bg-anim {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+  }
+  .shimmer-bg {
+      background-color: #e2e8f0; /* bg-slate-200 */
+      background-image: linear-gradient(90deg, #e2e8f0, #f8fafc, #e2e8f0);
+      background-size: 200% 100%;
+      animation: shimmer-bg-anim 1.5s linear infinite;
+  }
 </style>
 </head>
-  <body class="bg-slate-50 text-slate-800">
+  <body class="text-slate-800">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
+import { languages, LanguageCode } from '../translations';
+
 
 export type Theme = 'Blue' | 'Green' | 'Purple' | 'Orange';
 
@@ -46,6 +48,8 @@ interface SettingsContextProps {
   setTheme: (theme: Theme) => void;
   isAccessibilityMode: boolean;
   setAccessibilityMode: (enabled: boolean) => void;
+  language: LanguageCode;
+  setLanguage: (language: LanguageCode) => void;
 }
 
 export const SettingsContext = createContext<SettingsContextProps>({
@@ -53,6 +57,8 @@ export const SettingsContext = createContext<SettingsContextProps>({
   setTheme: () => {},
   isAccessibilityMode: false,
   setAccessibilityMode: () => {},
+  language: 'en',
+  setLanguage: () => {},
 });
 
 export const SettingsProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
@@ -62,6 +68,11 @@ export const SettingsProvider: React.FC<{children: React.ReactNode}> = ({ childr
 
   const [isAccessibilityMode, setAccessibilityMode] = useState<boolean>(() => {
     return localStorage.getItem('accessibilityMode') === 'true';
+  });
+
+  const [language, setLanguage] = useState<LanguageCode>(() => {
+    const savedLang = localStorage.getItem('language') as LanguageCode;
+    return savedLang && languages[savedLang] ? savedLang : 'en';
   });
 
   useEffect(() => {
@@ -85,12 +96,20 @@ export const SettingsProvider: React.FC<{children: React.ReactNode}> = ({ childr
     localStorage.setItem('accessibilityMode', String(isAccessibilityMode));
   }, [isAccessibilityMode]);
 
+  useEffect(() => {
+      document.documentElement.lang = language;
+      localStorage.setItem('language', language);
+  }, [language]);
+
+
   const value = useMemo(() => ({
     theme,
     setTheme,
     isAccessibilityMode,
     setAccessibilityMode,
-  }), [theme, isAccessibilityMode]);
+    language,
+    setLanguage,
+  }), [theme, isAccessibilityMode, language]);
 
   return (
     <SettingsContext.Provider value={value}>

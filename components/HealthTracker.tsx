@@ -1,10 +1,11 @@
-
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { HealthLog } from '../types';
 import CalendarView from './CalendarView';
 import HealthChart from './HealthChart';
 import { getHealthAnalysis } from '../services/geminiService';
 import { Icon } from './common/Icon';
+import { useTranslations } from '../hooks/useTranslations';
+import { SettingsContext } from '../contexts/SettingsContext';
 
 const HealthTracker: React.FC = () => {
   const [healthLogs, setHealthLogs] = useState<Record<string, HealthLog>>({
@@ -17,6 +18,8 @@ const HealthTracker: React.FC = () => {
   const [analysis, setAnalysis] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const { language } = useContext(SettingsContext);
+  const { t } = useTranslations();
 
   const handleLogsUpdate = (newLogs: Record<string, HealthLog>) => {
     setHealthLogs(newLogs);
@@ -24,16 +27,16 @@ const HealthTracker: React.FC = () => {
   
   const handleAnalyze = async () => {
       if (Object.keys(healthLogs).length === 0) {
-          setError("No health logs available to analyze.");
+          setError(t('healthTracker.error.noLogs'));
           return;
       }
       setIsLoading(true);
       setError(null);
       try {
-          const result = await getHealthAnalysis(Object.values(healthLogs));
+          const result = await getHealthAnalysis(Object.values(healthLogs), language);
           setAnalysis(result);
       } catch (err) {
-          setError(err instanceof Error ? err.message : 'An unknown error occurred during analysis.');
+          setError(err instanceof Error ? err.message : t('healthTracker.error.unknown'));
       } finally {
           setIsLoading(false);
       }
@@ -44,15 +47,15 @@ const HealthTracker: React.FC = () => {
       // Fix: Add explicit types for sort and map callback arguments to resolve type inference issues.
       .sort((a: HealthLog, b: HealthLog) => new Date(a.date).getTime() - new Date(b.date).getTime())
       .map((log: HealthLog) => ({
-        date: new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        date: new Date(log.date).toLocaleDateString(language, { month: 'short', day: 'numeric' }),
         severity: log.symptomSeverity,
       }));
-  }, [healthLogs]);
+  }, [healthLogs, language]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
       <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg border border-slate-200">
-        <h2 className="text-xl font-semibold text-slate-700 mb-4">Health Calendar</h2>
+        <h2 className="text-xl font-semibold text-slate-700 mb-4">{t('healthTracker.calendarTitle')}</h2>
         <CalendarView
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
@@ -63,14 +66,14 @@ const HealthTracker: React.FC = () => {
       
       <div className="lg:col-span-1 space-y-8">
         <div className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
-          <h2 className="text-xl font-semibold text-slate-700 mb-4">AI Insight Panel</h2>
+          <h2 className="text-xl font-semibold text-slate-700 mb-4">{t('healthTracker.insightPanelTitle')}</h2>
           <button
             onClick={handleAnalyze}
             className="w-full flex items-center justify-center gap-2 bg-green-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-slate-400"
             disabled={isLoading}
           >
             {isLoading ? <Icon name="loader" className="w-5 h-5 animate-spin" /> : <Icon name="sparkles" className="w-5 h-5" />}
-            Analyze Health Patterns
+            {t('healthTracker.analyzeButton')}
           </button>
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
           {analysis && !isLoading && (
@@ -81,12 +84,12 @@ const HealthTracker: React.FC = () => {
         </div>
         
         <div className="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
-            <h2 className="text-xl font-semibold text-slate-700 mb-4">Symptom Severity Trend</h2>
+            <h2 className="text-xl font-semibold text-slate-700 mb-4">{t('healthTracker.trendTitle')}</h2>
             {formattedChartData.length > 0 ? (
                 <HealthChart data={formattedChartData} />
             ) : (
                 <div className="text-center text-slate-500 py-8">
-                    <p>No data to display. Add some health logs to see your trend.</p>
+                    <p>{t('healthTracker.noData')}</p>
                 </div>
             )}
         </div>
