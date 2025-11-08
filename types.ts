@@ -1,4 +1,5 @@
 
+
 export interface PossibleCause {
   cause: string;
   confidence: number; // 0-100
@@ -9,6 +10,7 @@ export interface LocalHealthcareOption {
   name: string;
   type: string;
   address: string;
+  opening_hours?: string;
 }
 
 export interface Diagnosis {

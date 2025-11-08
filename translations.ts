@@ -17,7 +17,7 @@ export type LanguageCode = keyof typeof languages;
 export const translations: Record<LanguageCode, any> = {
   en: {
     app: {
-        title: 'Health AI',
+        title: 'Symptom Pro',
     },
     nav: {
         home: 'Home',
@@ -114,14 +114,14 @@ export const translations: Record<LanguageCode, any> = {
         fallbackSummary: '📄 Logged'
     },
     about: {
-        title: 'About Health AI Assistant',
+        title: 'About Symptom Pro',
         subtitle: 'Empowering you to take a proactive role in your health journey.',
         missionTitle: 'Our Mission',
         missionText: 'Our mission is to make health information more accessible and understandable. We believe that by providing intelligent tools, we can help individuals make more informed decisions about their well-being, in consultation with healthcare professionals.',
         howItWorksTitle: 'How It Works',
         howItWorksText: "This application utilizes Google's advanced Gemini AI models to analyze the information you provide. When you describe your symptoms or log your health data, the AI processes this information to identify potential patterns, suggest possible causes, and offer insights based on vast amounts of medical knowledge.",
         disclaimerTitle: 'Important Disclaimer',
-        disclaimerText: 'The Health AI Assistant is an informational tool and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this application.'
+        disclaimerText: 'Symptom Pro is an informational tool and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this application.'
     },
     settings: {
         title: 'Settings',
@@ -147,7 +147,7 @@ export const translations: Record<LanguageCode, any> = {
   },
   es: {
     app: {
-      title: 'Salud IA',
+      title: 'Symptom Pro',
     },
     nav: {
       home: 'Inicio',
@@ -244,14 +244,14 @@ export const translations: Record<LanguageCode, any> = {
       fallbackSummary: '📄 Registrado',
     },
     about: {
-      title: 'Sobre el Asistente de Salud IA',
+      title: 'Sobre Symptom Pro',
       subtitle: 'Empoderándote para tomar un rol proactivo en tu viaje de salud.',
       missionTitle: 'Nuestra Misión',
       missionText: 'Nuestra misión es hacer que la información de salud sea más accesible y comprensible. Creemos que al proporcionar herramientas inteligentes, podemos ayudar a las personas a tomar decisiones más informadas sobre su bienestar, en consulta con profesionales de la salud.',
       howItWorksTitle: 'Cómo Funciona',
       howItWorksText: 'Esta aplicación utiliza los modelos avanzados de IA Gemini de Google para analizar la información que proporcionas. Cuando describes tus síntomas o registras tus datos de salud, la IA procesa esta información para identificar patrones potenciales, sugerir posibles causas y ofrecer perspectivas basadas en vastas cantidades de conocimiento médico.',
       disclaimerTitle: 'Aviso Importante',
-      disclaimerText: 'El Asistente de Salud IA es una herramienta informativa y no sustituye el consejo, diagnóstico o tratamiento médico profesional. Siempre busca el consejo de tu médico u otro proveedor de salud calificado con cualquier pregunta que puedas tener sobre una condición médica. Nunca ignores el consejo médico profesional ni demores en buscarlo por algo que hayas leído en esta aplicación.',
+      disclaimerText: 'Symptom Pro es una herramienta informativa y no sustituye el consejo, diagnóstico o tratamiento médico profesional. Siempre busca el consejo de tu médico u otro proveedor de salud calificado con cualquier pregunta que puedas tener sobre una condición médica. Nunca ignores el consejo médico profesional ni demores en buscarlo por algo que hayas leído en esta aplicación.',
     },
     settings: {
       title: 'Ajustes',
@@ -277,55 +277,55 @@ export const translations: Record<LanguageCode, any> = {
   },
   // Adding stubs for other languages to avoid errors, a full translation would be extensive.
   fr: {
-    app: { title: "Santé IA" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'Accueil', checker: 'Vérificateur', tracker: 'Suivi', about: 'À propos', settings: 'Paramètres', checkerShort: 'Vérif', trackerShort: 'Suivi', aboutShort: 'À propos' },
     home: { title: "Votre Assistant Santé Personnel", checkerButton: "Vérifier les Symptômes", trackerButton: "Suivre Votre Santé" },
     settings: { title: 'Paramètres', subtitle: "Personnalisez votre expérience.", language: { title: 'Langue', selectLabel: 'Choisissez votre langue' }, accessibility: { title: 'Accessibilité', enableLabel: 'Activer le mode accessibilité', description: 'Augmente la taille du texte.' }, theme: { title: 'Thème', description: "Choisissez une couleur.", blue: 'Bleu', green: 'Vert', purple: 'Violet', orange: 'Orange' } },
   },
   de: {
-    app: { title: "Gesundheits-KI" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'Start', checker: 'Symptom-Checker', tracker: 'Gesundheits-Tracker', about: 'Über uns', settings: 'Einstellungen', checkerShort: 'Checker', trackerShort: 'Tracker', aboutShort: 'Über' },
     home: { title: "Ihr Persönlicher Gesundheitsassistent", checkerButton: "Symptome Prüfen", trackerButton: "Gesundheit Verfolgen" },
     settings: { title: 'Einstellungen', subtitle: "Passen Sie Ihre App an.", language: { title: 'Sprache', selectLabel: 'Wählen Sie Ihre Sprache' }, accessibility: { title: 'Barrierefreiheit', enableLabel: 'Barrierefreiheitsmodus aktivieren', description: 'Vergrößert die Schriftgröße.' }, theme: { title: 'Thema', description: "Wählen Sie eine Farbe.", blue: 'Blau', green: 'Grün', purple: 'Lila', orange: 'Orange' } },
   },
   hi: {
-    app: { title: "स्वास्थ्य एआई" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'होम', checker: 'लक्षण परीक्षक', tracker: 'स्वास्थ्य ट्रैकर', about: 'हमारे बारे में', settings: 'सेटिंग्स', checkerShort: 'परीक्षक', trackerShort: 'ट्रैकर', aboutShort: 'बारे में' },
     home: { title: "आपका व्यक्तिगत स्वास्थ्य साथी", checkerButton: "लक्षणों की जाँच करें", trackerButton: "अपने स्वास्थ्य को ट्रैक करें" },
     settings: { title: 'सेटिंग्स', subtitle: "अपने ऐप का अनुभव अनुकूलित करें।", language: { title: 'भाषा', selectLabel: 'अपनी पसंदीदा भाषा चुनें' }, accessibility: { title: 'सरल उपयोग', enableLabel: 'सरल उपयोग मोड सक्षम करें', description: 'पठनीयता के लिए फ़ॉन्ट आकार बढ़ाता है।' }, theme: { title: 'थीम', description: "एक रंग चुनें।", blue: 'नीला', green: 'हरा', purple: 'बैंगनी', orange: 'नारंगी' } },
   },
   ta: {
-    app: { title: "சுகாதார AI" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'முகப்பு', checker: 'அறிகுறி சரிபார்ப்பு', tracker: 'சுகாதார டிராக்கர்', about: 'பற்றி', settings: 'அமைப்புகள்', checkerShort: 'சரிபார்ப்பு', trackerShort: 'டிராக்கர்', aboutShort: 'பற்றி' },
     home: { title: "உங்கள் தனிப்பட்ட சுகாதார துணை", checkerButton: "அறிகுறிகளைச் சரிபார்க்கவும்", trackerButton: "உங்கள் ஆரோக்கியத்தைக் கண்காணிக்கவும்" },
     settings: { title: 'அமைப்புகள்', subtitle: "உங்கள் பயன்பாட்டு அனுபவத்தைத் தனிப்பயனாக்குங்கள்.", language: { title: 'மொழி', selectLabel: 'உங்களுக்கு விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்' }, accessibility: { title: 'அணுகல்தன்மை', enableLabel: 'அணுகல்தன்மை பயன்முறையை இயக்கு', description: 'எழுத்துரு அளவை அதிகரிக்கிறது.' }, theme: { title: 'தீம்', description: "ஒரு வண்ணத்தைத் தேர்ந்தெடுக்கவும்.", blue: 'நீலம்', green: 'பச்சை', purple: 'ஊதா', orange: 'ஆரஞ்சு' } },
   },
   ru: {
-    app: { title: "Здоровье ИИ" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'Главная', checker: 'Проверка симптомов', tracker: 'Трекер здоровья', about: 'О нас', settings: 'Настройки', checkerShort: 'Проверка', trackerShort: 'Трекер', aboutShort: 'О нас' },
     home: { title: "Ваш личный помощник по здоровью", checkerButton: "Проверить симптомы", trackerButton: "Отслеживать здоровье" },
     settings: { title: 'Настройки', subtitle: "Настройте приложение.", language: { title: 'Язык', selectLabel: 'Выберите язык' }, accessibility: { title: 'Доступность', enableLabel: 'Включить режим доступности', description: 'Увеличивает размер шрифта.' }, theme: { title: 'Тема', description: "Выберите цвет.", blue: 'Синий', green: 'Зеленый', purple: 'Фиолетовый', orange: 'Оранжевый' } },
   },
   ar: {
-    app: { title: "الصحة بالذكاء الاصطناعي" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'الرئيسية', checker: 'فاحص الأعراض', tracker: 'متتبع الصحة', about: 'حولنا', settings: 'الإعدادات', checkerShort: 'فاحص', trackerShort: 'متتبع', aboutShort: 'حول' },
     home: { title: "مساعدك الصحي الشخصي", checkerButton: "افحص الأعراض الآن", trackerButton: "تتبع صحتك" },
     settings: { title: 'الإعدادات', subtitle: "تخصيص تجربتك.", language: { title: 'اللغة', selectLabel: 'اختر لغتك' }, accessibility: { title: 'إمكانية الوصول', enableLabel: 'تمكين وضع الوصول', description: 'يزيد حجم الخط.' }, theme: { title: 'المظهر', description: "اختر لونا.", blue: 'أزرق', green: 'أخضر', purple: 'بنفسجي', orange: 'برتقالي' } },
   },
   zh: {
-    app: { title: "健康AI" },
+    app: { title: "Symptom Pro" },
     nav: { home: '首页', checker: '症状检查器', tracker: '健康追踪器', about: '关于我们', settings: '设置', checkerShort: '检查器', trackerShort: '追踪器', aboutShort: '关于' },
     home: { title: "您的个人健康伴侣", checkerButton: "立即检查症状", trackerButton: "追踪您的健康" },
     settings: { title: '设置', subtitle: "自定义您的应用体验。", language: { title: '语言', selectLabel: '选择您的语言' }, accessibility: { title: '辅助功能', enableLabel: '启用辅助功能模式', description: '增加字体大小。' }, theme: { title: '主题', description: "选择颜色。", blue: '蓝色', green: '绿色', purple: '紫色', orange: '橙色' } },
   },
   ja: {
-    app: { title: "健康AI" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'ホーム', checker: '症状チェッカー', tracker: '健康トラッカー', about: '概要', settings: '設定', checkerShort: 'チェッカー', trackerShort: 'トラッカー', aboutShort: '概要' },
     home: { title: "あなたのパーソナルヘルスコンパニオン", checkerButton: "症状をチェック", trackerButton: "健康を追跡" },
     settings: { title: '設定', subtitle: "アプリをカスタマイズします。", language: { title: '言語', selectLabel: '言語を選択' }, accessibility: { title: 'アクセシビリティ', enableLabel: 'アクセシビリティモードを有効にする', description: '文字サイズを大きくします。' }, theme: { title: 'テーマ', description: "色を選択。", blue: '青', green: '緑', purple: '紫', orange: 'オレンジ' } },
   },
   pt: {
-    app: { title: "Saúde IA" },
+    app: { title: "Symptom Pro" },
     nav: { home: 'Início', checker: 'Verificador de Sintomas', tracker: 'Rastreador de Saúde', about: 'Sobre', settings: 'Configurações', checkerShort: 'Verificador', trackerShort: 'Rastreador', aboutShort: 'Sobre' },
     home: { title: "Seu Assistente Pessoal de Saúde", checkerButton: "Verificar Sintomas", trackerButton: "Acompanhar Saúde" },
     settings: { title: 'Configurações', subtitle: "Personalize sua experiência.", language: { title: 'Idioma', selectLabel: 'Selecione seu idioma' }, accessibility: { title: 'Acessibilidade', enableLabel: 'Ativar modo de acessibilidade', description: 'Aumenta o tamanho da fonte.' }, theme: { title: 'Tema', description: "Escolha uma cor.", blue: 'Azul', green: 'Verde', purple: 'Roxo', orange: 'Laranja' } },

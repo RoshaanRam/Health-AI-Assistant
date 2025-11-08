@@ -33,6 +33,7 @@ const diagnosisSchema = {
                     name: { type: Type.STRING },
                     type: { type: Type.STRING, description: 'e.g., Hospital, Clinic, Pharmacy' },
                     address: { type: Type.STRING },
+                    opening_hours: { type: Type.STRING, description: 'Opening and closing hours, if available. e.g., Mon-Fri 9:00 AM - 5:00 PM' },
                 },
                 required: ['name', 'type', 'address'],
             }
@@ -62,7 +63,7 @@ export const getDiagnosis = async (symptoms: string, location: GeolocationData |
         
         Based on all this information, please provide a structured analysis including:
         1. A list of possible causes, each with a confidence score (0-100) and a brief, clear suggested treatment plan.
-        2. A list of 3-4 relevant local healthcare options (like clinics, hospitals, or pharmacies) if the location is known. If the location is not available, provide generic advice on finding local care.
+        2. A list of 3-4 relevant local healthcare options (like clinics, hospitals, or pharmacies) if the location is known. Include their opening hours if available. If the location is not available, provide generic advice on finding local care.
         
         IMPORTANT: Your entire response, including all text in the final JSON output, must be in ${languageName}.
         Return the response in a JSON format matching the provided schema.

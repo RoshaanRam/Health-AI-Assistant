@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health AI Assistant</title>
+    <title>Symptom Pro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -40,7 +40,15 @@
       }
 
       body.accessibility-mode {
-        font-size: 18px;
+        font-size: 19px;
+      }
+
+      /* In accessibility mode, make text bolder to improve readability. */
+      .accessibility-mode * {
+        font-weight: 500 !important;
+      }
+      .accessibility-mode strong, .accessibility-mode b, .accessibility-mode h1, .accessibility-mode h2, .accessibility-mode h3, .accessibility-mode h4, .accessibility-mode h5, .accessibility-mode h6 {
+        font-weight: 700 !important;
       }
 
       .range-thumb {

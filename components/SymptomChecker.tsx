@@ -117,7 +117,7 @@ const SymptomChecker: React.FC = () => {
                             name="age"
                             value={demographics.age === null ? '' : demographics.age}
                             onChange={handleDemographicsChange}
-                            className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                             placeholder={t('symptomChecker.agePlaceholder')}
                         />
                     </div>
@@ -150,7 +150,7 @@ const SymptomChecker: React.FC = () => {
                             rows={5}
                             value={symptoms}
                             onChange={(e) => setSymptoms(e.target.value)}
-                            className="block w-full px-3 py-2 pr-12 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                            className="block w-full px-3 py-2 pr-12 bg-white border border-slate-300 rounded-md shadow-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                             placeholder={t('symptomChecker.symptomsPlaceholder')}
                             required
                         />
@@ -216,6 +216,12 @@ const SymptomChecker: React.FC = () => {
                                         <Icon name="location" className="w-4 h-4 text-slate-400" />
                                         <span>{item.address}</span>
                                     </p>
+                                    {item.opening_hours && (
+                                        <p className="mt-1 text-slate-600 flex items-center gap-2">
+                                            <Icon name="clock" className="w-4 h-4 text-slate-400" />
+                                            <span>{item.opening_hours}</span>
+                                        </p>
+                                    )}
                                 </li>
                             ))}
                         </ul>
