@@ -1,3 +1,5 @@
+
+
 export const languages = {
   en: 'English',
   es: 'Español (Spanish)',
@@ -43,31 +45,67 @@ export const translations: Record<LanguageCode, any> = {
     },
     symptomChecker: {
         patientInfo: 'Patient Information',
+        emergencyWarning: 'If you are experiencing a medical emergency (e.g., difficulty breathing, chest pain, severe bleeding), call emergency services immediately.',
         age: 'Age',
         agePlaceholder: 'e.g., 35',
-        gender: 'Gender',
+        sexAtBirth: 'Sex at birth',
         select: 'Select...',
         male: 'Male',
         female: 'Female',
         other: 'Other',
         preferNotToSay: 'Prefer not to say',
         ethnicity: 'Ethnicity',
-        ethnicities: {
-            white: 'White',
-            southAsian: 'South Asian',
-            chinese: 'Chinese',
-            black: 'Black',
-            filipino: 'Filipino',
-            latinAmerican: 'Latin American',
-            arab: 'Arab',
-            southeastAsian: 'Southeast Asian',
-            westAsian: 'West Asian',
-            korean: 'Korean',
-            japanese: 'Japanese',
-            indigenous: 'Indigenous (First Nations, Métis, Inuit)',
+        ethnicityCategories: {
+            white: 'White / Caucasian',
+            black: 'Black / African Descent',
+            asian: 'Asian',
+            hispanic: 'Hispanic / Latino',
+            middleEastern: 'Middle Eastern / North African',
+            mixed: 'Mixed / Multi-ethnic',
+            indigenous: 'Indigenous / First Nations',
+            other: 'Other'
+        },
+        ethnicityOptions: {
+            white_caucasian: 'White / Caucasian',
+            white_other: 'Other White background',
+            black_african: 'African',
+            black_caribbean: 'Caribbean',
+            black_american: 'African American',
+            black_other: 'Other Black background',
+            asian_chinese: 'Chinese',
+            asian_indian: 'Indian',
+            asian_filipino: 'Filipino',
+            asian_japanese: 'Japanese',
+            asian_korean: 'Korean',
+            asian_vietnamese: 'Vietnamese',
+            asian_south: 'South Asian',
+            asian_southeast: 'Southeast Asian',
+            hispanic_latino: 'Hispanic / Latino',
+            middle_eastern_arab: 'Arab',
+            middle_eastern_other: 'Other Middle Eastern',
+            mixed_white_black: 'Mixed (White & Black)',
+            mixed_white_asian: 'Mixed (White & Asian)',
+            mixed_other: 'Other Mixed background',
+            indigenous_native: 'Native American / First Nations',
+            indigenous_pacific: 'Pacific Islander',
+            other_other: 'Other ethnic group',
+            prefer_not_to_say: 'Prefer not to say'
         },
         describeSymptoms: 'Describe Your Symptoms',
         symptomsPlaceholder: "e.g., 'I have a sore throat, a slight fever, and a cough...'",
+        commonTagsLabel: 'Quick Tags:',
+        tags: {
+            fever: 'Fever',
+            cough: 'Cough',
+            headache: 'Headache',
+            fatigue: 'Fatigue',
+            nausea: 'Nausea',
+            dizziness: 'Dizziness',
+            soreThroat: 'Sore Throat',
+            shortnessOfBreath: 'Shortness of Breath',
+            chestPain: 'Chest Pain',
+            rash: 'Rash'
+        },
         mic: {
             start: 'Start recording',
             stop: 'Stop recording',
@@ -75,8 +113,9 @@ export const translations: Record<LanguageCode, any> = {
             error: 'Speech recognition error: {error}. Please ensure microphone access is granted.'
         },
         submitButton: {
-            default: 'Get AI Analysis',
-            loading: 'Analyzing...'
+            default: 'Check Symptoms',
+            loading: 'Analyzing...',
+            generatingQuestions: 'Generating questions...'
         },
         error: {
             location: 'Could not get location. Local healthcare suggestions will be generic.',
@@ -85,9 +124,28 @@ export const translations: Record<LanguageCode, any> = {
         },
         results: {
             possibleCauses: 'Possible Causes',
-            confidence: '% Confidence',
+            tapForDetails: 'Tap for details',
+            confidence: '% Match',
             suggestedTreatment: 'Suggested Treatment:',
-            localHealthcare: 'Local Healthcare Options'
+            homeCare: 'Immediate Home Care Tips',
+            localHealthcare: 'Local Healthcare Options',
+            readAloud: 'Read Results',
+            stopReading: 'Stop Reading',
+            viewOnMap: 'View on Google Maps',
+            waitTime: 'Est. Wait Time',
+            causeDetails: {
+                description: 'Description',
+                whenToSeeDoctor: 'When to see a doctor'
+            },
+            saveToTracker: 'Save to Tracker',
+            printReport: 'Print Report',
+            savedSuccess: 'Saved!'
+        },
+        followUp: {
+            title: 'Clarifying Questions',
+            subtitle: 'To provide a more accurate analysis, please answer a few quick questions based on your symptoms.',
+            skip: 'Skip and Analyze',
+            submit: 'Submit Answers & Analyze'
         }
     },
     healthTracker: {
@@ -173,31 +231,67 @@ export const translations: Record<LanguageCode, any> = {
     },
     symptomChecker: {
       patientInfo: 'Información del Paciente',
+      emergencyWarning: 'Si experimentas una emergencia médica (p. ej., dificultad para respirar, dolor en el pecho, sangrado grave), llama a los servicios de emergencia de inmediato.',
       age: 'Edad',
       agePlaceholder: 'ej., 35',
-      gender: 'Género',
+      sexAtBirth: 'Sexo al nacer',
       select: 'Seleccionar...',
       male: 'Masculino',
       female: 'Femenino',
       other: 'Otro',
       preferNotToSay: 'Prefiero no decirlo',
       ethnicity: 'Etnia',
-      ethnicities: {
-        white: 'Blanco',
-        southAsian: 'Surasiático',
-        chinese: 'Chino',
-        black: 'Negro',
-        filipino: 'Filipino',
-        latinAmerican: 'Latinoamericano',
-        arab: 'Árabe',
-        southeastAsian: 'Sudeste Asiático',
-        westAsian: 'Asiático Occidental',
-        korean: 'Coreano',
-        japanese: 'Japonés',
+      ethnicityCategories: {
+        white: 'Blanco / Caucásico',
+        black: 'Negro / Descendencia Africana',
+        asian: 'Asiático',
+        hispanic: 'Hispano / Latino',
+        middleEastern: 'Medio Oriente / Norte de África',
+        mixed: 'Mixto / Multiétnico',
         indigenous: 'Indígena',
+        other: 'Otro'
+      },
+      ethnicityOptions: {
+        white_caucasian: 'Blanco / Caucásico',
+        white_other: 'Otro fondo blanco',
+        black_african: 'Africano',
+        black_caribbean: 'Caribeño',
+        black_american: 'Afroamericano',
+        black_other: 'Otro fondo negro',
+        asian_chinese: 'Chino',
+        asian_indian: 'Indio',
+        asian_filipino: 'Filipino',
+        asian_japanese: 'Japonés',
+        asian_korean: 'Coreano',
+        asian_vietnamese: 'Vietnamita',
+        asian_south: 'Sur asiático',
+        asian_southeast: 'Sudeste asiático',
+        hispanic_latino: 'Hispano / Latino',
+        middle_eastern_arab: 'Árabe',
+        middle_eastern_other: 'Otro de Medio Oriente',
+        mixed_white_black: 'Mixto (Blanco y Negro)',
+        mixed_white_asian: 'Mixto (Blanco y Asiático)',
+        mixed_other: 'Otro fondo mixto',
+        indigenous_native: 'Nativo Americano / Indígena',
+        indigenous_pacific: 'Isleño del Pacífico',
+        other_other: 'Otro grupo étnico',
+        prefer_not_to_say: 'Prefiero no decirlo'
       },
       describeSymptoms: 'Describe Tus Síntomas',
       symptomsPlaceholder: "ej., 'Tengo dolor de garganta, un poco de fiebre y tos...'",
+      commonTagsLabel: 'Etiquetas Rápidas:',
+      tags: {
+            fever: 'Fiebre',
+            cough: 'Tos',
+            headache: 'Dolor de cabeza',
+            fatigue: 'Fatiga',
+            nausea: 'Náuseas',
+            dizziness: 'Mareos',
+            soreThroat: 'Dolor de garganta',
+            shortnessOfBreath: 'Falta de aliento',
+            chestPain: 'Dolor de pecho',
+            rash: 'Erupción'
+      },
       mic: {
         start: 'Comenzar a grabar',
         stop: 'Detener grabación',
@@ -205,8 +299,9 @@ export const translations: Record<LanguageCode, any> = {
         error: 'Error de reconocimiento de voz: {error}. Asegúrate de conceder acceso al micrófono.',
       },
       submitButton: {
-        default: 'Obtener Análisis de IA',
+        default: 'Verificar Síntomas',
         loading: 'Analizando...',
+        generatingQuestions: 'Generando preguntas...'
       },
       error: {
         location: 'No se pudo obtener la ubicación. Las sugerencias de atención médica local serán genéricas.',
@@ -215,10 +310,29 @@ export const translations: Record<LanguageCode, any> = {
       },
       results: {
         possibleCauses: 'Posibles Causas',
-        confidence: '% de Confianza',
+        tapForDetails: 'Toca para ver detalles',
+        confidence: '% Coincidencia',
         suggestedTreatment: 'Tratamiento Sugerido:',
+        homeCare: 'Consejos de Cuidado en el Hogar',
         localHealthcare: 'Opciones de Atención Médica Local',
+        readAloud: 'Leer Resultados',
+        stopReading: 'Dejar de Leer',
+        viewOnMap: 'Ver en Google Maps',
+        waitTime: 'Tiempo de espera est.',
+        causeDetails: {
+            description: 'Descripción',
+            whenToSeeDoctor: 'Cuándo ver a un médico'
+        },
+        saveToTracker: 'Guardar en Rastreador',
+        printReport: 'Imprimir Reporte',
+        savedSuccess: '¡Guardado!'
       },
+      followUp: {
+        title: 'Preguntas Aclaratorias',
+        subtitle: 'Para proporcionar un análisis más preciso, por favor responde unas preguntas rápidas basadas en tus síntomas.',
+        skip: 'Omitir y Analizar',
+        submit: 'Enviar y Analizar'
+      }
     },
     healthTracker: {
       calendarTitle: 'Calendario de Salud',
@@ -275,59 +389,67 @@ export const translations: Record<LanguageCode, any> = {
       },
     },
   },
-  // Adding stubs for other languages to avoid errors, a full translation would be extensive.
   fr: {
     app: { title: "Symptom Pro" },
     nav: { home: 'Accueil', checker: 'Vérificateur', tracker: 'Suivi', about: 'À propos', settings: 'Paramètres', checkerShort: 'Vérif', trackerShort: 'Suivi', aboutShort: 'À propos' },
     home: { title: "Votre Assistant Santé Personnel", checkerButton: "Vérifier les Symptômes", trackerButton: "Suivre Votre Santé" },
+    symptomChecker: { emergencyWarning: 'Si vous avez une urgence médicale, appelez immédiatement les secours.', results: { readAloud: "Lire les résultats", stopReading: "Arrêter la lecture", waitTime: "Temps d'attente est." }, followUp: { title: 'Questions de clarification', subtitle: 'Pour une analyse plus précise, veuillez répondre à quelques questions.', skip: 'Passer', submit: 'Envoyer' } },
     settings: { title: 'Paramètres', subtitle: "Personnalisez votre expérience.", language: { title: 'Langue', selectLabel: 'Choisissez votre langue' }, accessibility: { title: 'Accessibilité', enableLabel: 'Activer le mode accessibilité', description: 'Augmente la taille du texte.' }, theme: { title: 'Thème', description: "Choisissez une couleur.", blue: 'Bleu', green: 'Vert', purple: 'Violet', orange: 'Orange' } },
   },
   de: {
     app: { title: "Symptom Pro" },
     nav: { home: 'Start', checker: 'Symptom-Checker', tracker: 'Gesundheits-Tracker', about: 'Über uns', settings: 'Einstellungen', checkerShort: 'Checker', trackerShort: 'Tracker', aboutShort: 'Über' },
     home: { title: "Ihr Persönlicher Gesundheitsassistent", checkerButton: "Symptome Prüfen", trackerButton: "Gesundheit Verfolgen" },
+    symptomChecker: { emergencyWarning: 'Wenn Sie einen medizinischen Notfall haben, rufen Sie sofort den Notdienst.', results: { readAloud: "Ergebnisse vorlesen", stopReading: "Vorlesen stoppen", waitTime: "Gesch. Wartezeit" }, followUp: { title: 'Klärungsfragen', subtitle: 'Bitte beantworten Sie einige Fragen für eine genauere Analyse.', skip: 'Überspringen', submit: 'Absenden' } },
     settings: { title: 'Einstellungen', subtitle: "Passen Sie Ihre App an.", language: { title: 'Sprache', selectLabel: 'Wählen Sie Ihre Sprache' }, accessibility: { title: 'Barrierefreiheit', enableLabel: 'Barrierefreiheitsmodus aktivieren', description: 'Vergrößert die Schriftgröße.' }, theme: { title: 'Thema', description: "Wählen Sie eine Farbe.", blue: 'Blau', green: 'Grün', purple: 'Lila', orange: 'Orange' } },
   },
   hi: {
     app: { title: "Symptom Pro" },
     nav: { home: 'होम', checker: 'लक्षण परीक्षक', tracker: 'स्वास्थ्य ट्रैकर', about: 'हमारे बारे में', settings: 'सेटिंग्स', checkerShort: 'परीक्षक', trackerShort: 'ट्रैकर', aboutShort: 'बारे में' },
     home: { title: "आपका व्यक्तिगत स्वास्थ्य साथी", checkerButton: "लक्षणों की जाँच करें", trackerButton: "अपने स्वास्थ्य को ट्रैक करें" },
+    symptomChecker: { emergencyWarning: 'यदि आपको कोई चिकित्सीय आपात स्थिति है, तो तुरंत आपातकालीन सेवाओं को कॉल करें।', results: { readAloud: "परिणाम पढ़ें", stopReading: "पढ़ना बंद करें", waitTime: "अनुमानित प्रतीक्षा समय" }, followUp: { title: 'स्पष्टीकरण प्रश्न', subtitle: 'अधिक सटीक विश्लेषण के लिए, कृपया कुछ प्रश्नों के उत्तर दें।', skip: 'छोड़ें', submit: 'जमा करें' } },
     settings: { title: 'सेटिंग्स', subtitle: "अपने ऐप का अनुभव अनुकूलित करें।", language: { title: 'भाषा', selectLabel: 'अपनी पसंदीदा भाषा चुनें' }, accessibility: { title: 'सरल उपयोग', enableLabel: 'सरल उपयोग मोड सक्षम करें', description: 'पठनीयता के लिए फ़ॉन्ट आकार बढ़ाता है।' }, theme: { title: 'थीम', description: "एक रंग चुनें।", blue: 'नीला', green: 'हरा', purple: 'बैंगनी', orange: 'नारंगी' } },
   },
   ta: {
     app: { title: "Symptom Pro" },
     nav: { home: 'முகப்பு', checker: 'அறிகுறி சரிபார்ப்பு', tracker: 'சுகாதார டிராக்கர்', about: 'பற்றி', settings: 'அமைப்புகள்', checkerShort: 'சரிபார்ப்பு', trackerShort: 'டிராக்கர்', aboutShort: 'பற்றி' },
     home: { title: "உங்கள் தனிப்பட்ட சுகாதார துணை", checkerButton: "அறிகுறிகளைச் சரிபார்க்கவும்", trackerButton: "உங்கள் ஆரோக்கியத்தைக் கண்காணிக்கவும்" },
+    symptomChecker: { emergencyWarning: 'உங்களுக்கு மருத்துவ அவசரநிலை ஏற்பட்டால், உடனடியாக அவசர சேவைகளை அழைக்கவும்.', results: { readAloud: "முடிவுகளைப் படியுங்கள்", stopReading: "படிப்பதை நிறுத்துங்கள்", waitTime: "மதிப்பிடப்பட்ட காத்திருப்பு நேரம்" }, followUp: { title: 'தெளிவுபடுத்தும் கேள்விகள்', subtitle: 'மேலும் துல்லியமான பகுப்பாய்வை வழங்க, சில கேள்விகளுக்கு பதிலளிக்கவும்.', skip: 'தவிர்', submit: 'சமர்ப்பி' } },
     settings: { title: 'அமைப்புகள்', subtitle: "உங்கள் பயன்பாட்டு அனுபவத்தைத் தனிப்பயனாக்குங்கள்.", language: { title: 'மொழி', selectLabel: 'உங்களுக்கு விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்' }, accessibility: { title: 'அணுகல்தன்மை', enableLabel: 'அணுகல்தன்மை பயன்முறையை இயக்கு', description: 'எழுத்துரு அளவை அதிகரிக்கிறது.' }, theme: { title: 'தீம்', description: "ஒரு வண்ணத்தைத் தேர்ந்தெடுக்கவும்.", blue: 'நீலம்', green: 'பச்சை', purple: 'ஊதா', orange: 'ஆரஞ்சு' } },
   },
   ru: {
     app: { title: "Symptom Pro" },
     nav: { home: 'Главная', checker: 'Проверка симптомов', tracker: 'Трекер здоровья', about: 'О нас', settings: 'Настройки', checkerShort: 'Проверка', trackerShort: 'Трекер', aboutShort: 'О нас' },
     home: { title: "Ваш личный помощник по здоровью", checkerButton: "Проверить симптомы", trackerButton: "Отслеживать здоровье" },
+    symptomChecker: { emergencyWarning: 'Если у вас неотложная медицинская помощь, немедленно позвоните в экстренные службы.', results: { readAloud: "Прочитать результаты", stopReading: "Остановить чтение", waitTime: "Примерное время ожидания" }, followUp: { title: 'Уточняющие вопросы', subtitle: 'Для более точного анализа ответьте на несколько вопросов.', skip: 'Пропустить', submit: 'Отправить' } },
     settings: { title: 'Настройки', subtitle: "Настройте приложение.", language: { title: 'Язык', selectLabel: 'Выберите язык' }, accessibility: { title: 'Доступность', enableLabel: 'Включить режим доступности', description: 'Увеличивает размер шрифта.' }, theme: { title: 'Тема', description: "Выберите цвет.", blue: 'Синий', green: 'Зеленый', purple: 'Фиолетовый', orange: 'Оранжевый' } },
   },
   ar: {
     app: { title: "Symptom Pro" },
     nav: { home: 'الرئيسية', checker: 'فاحص الأعراض', tracker: 'متتبع الصحة', about: 'حولنا', settings: 'الإعدادات', checkerShort: 'فاحص', trackerShort: 'متتبع', aboutShort: 'حول' },
     home: { title: "مساعدك الصحي الشخصي", checkerButton: "افحص الأعراض الآن", trackerButton: "تتبع صحتك" },
+    symptomChecker: { emergencyWarning: 'إذا كنت تعاني من حالة طوارئ طبية، فاتصل بخدمات الطوارئ على الفور.', results: { readAloud: "قراءة النتائج", stopReading: "إيقاف القراءة", waitTime: "وقت الانتظار المتوقع" }, followUp: { title: 'أسئلة توضيحية', subtitle: 'للحصول على تحليل أكثر دقة، يرجى الإجابة على بضعة أسئلة.', skip: 'تخطي', submit: 'إرسال' } },
     settings: { title: 'الإعدادات', subtitle: "تخصيص تجربتك.", language: { title: 'اللغة', selectLabel: 'اختر لغتك' }, accessibility: { title: 'إمكانية الوصول', enableLabel: 'تمكين وضع الوصول', description: 'يزيد حجم الخط.' }, theme: { title: 'المظهر', description: "اختر لونا.", blue: 'أزرق', green: 'أخضر', purple: 'بنفسجي', orange: 'برتقالي' } },
   },
   zh: {
     app: { title: "Symptom Pro" },
     nav: { home: '首页', checker: '症状检查器', tracker: '健康追踪器', about: '关于我们', settings: '设置', checkerShort: '检查器', trackerShort: '追踪器', aboutShort: '关于' },
     home: { title: "您的个人健康伴侣", checkerButton: "立即检查症状", trackerButton: "追踪您的健康" },
+    symptomChecker: { emergencyWarning: '如果您遇到医疗紧急情况，请立即拨打紧急服务电话。', results: { readAloud: "朗读结果", stopReading: "停止朗读", waitTime: "预计等待时间" }, followUp: { title: '澄清问题', subtitle: '为了提供更准确的分析，请回答几个问题。', skip: '跳过', submit: '提交' } },
     settings: { title: '设置', subtitle: "自定义您的应用体验。", language: { title: '语言', selectLabel: '选择您的语言' }, accessibility: { title: '辅助功能', enableLabel: '启用辅助功能模式', description: '增加字体大小。' }, theme: { title: '主题', description: "选择颜色。", blue: '蓝色', green: '绿色', purple: '紫色', orange: '橙色' } },
   },
   ja: {
     app: { title: "Symptom Pro" },
     nav: { home: 'ホーム', checker: '症状チェッカー', tracker: '健康トラッカー', about: '概要', settings: '設定', checkerShort: 'チェッカー', trackerShort: 'トラッカー', aboutShort: '概要' },
     home: { title: "あなたのパーソナルヘルスコンパニオン", checkerButton: "症状をチェック", trackerButton: "健康を追跡" },
+    symptomChecker: { emergencyWarning: '医療緊急事態が発生した場合は、すぐに救急サービスに電話してください。', results: { readAloud: "結果を読み上げる", stopReading: "読み上げを停止", waitTime: "予想待ち時間" }, followUp: { title: '確認の質問', subtitle: 'より正確な分析のために、いくつかの質問にお答えください。', skip: 'スキップ', submit: '送信' } },
     settings: { title: '設定', subtitle: "アプリをカスタマイズします。", language: { title: '言語', selectLabel: '言語を選択' }, accessibility: { title: 'アクセシビリティ', enableLabel: 'アクセシビリティモードを有効にする', description: '文字サイズを大きくします。' }, theme: { title: 'テーマ', description: "色を選択。", blue: '青', green: '緑', purple: '紫', orange: 'オレンジ' } },
   },
   pt: {
     app: { title: "Symptom Pro" },
     nav: { home: 'Início', checker: 'Verificador de Sintomas', tracker: 'Rastreador de Saúde', about: 'Sobre', settings: 'Configurações', checkerShort: 'Verificador', trackerShort: 'Rastreador', aboutShort: 'Sobre' },
     home: { title: "Seu Assistente Pessoal de Saúde", checkerButton: "Verificar Sintomas", trackerButton: "Acompanhar Saúde" },
+    symptomChecker: { emergencyWarning: 'Se você estiver passando por uma emergência médica, ligue para os serviços de emergência imediatamente.', results: { readAloud: "Ler Resultados", stopReading: "Parar Leitura", waitTime: "Tempo de espera est." }, followUp: { title: 'Perguntas de Esclarecimento', subtitle: 'Para uma análise mais precisa, responda a algumas perguntas.', skip: 'Pular', submit: 'Enviar' } },
     settings: { title: 'Configurações', subtitle: "Personalize sua experiência.", language: { title: 'Idioma', selectLabel: 'Selecione seu idioma' }, accessibility: { title: 'Acessibilidade', enableLabel: 'Ativar modo de acessibilidade', description: 'Aumenta o tamanho da fonte.' }, theme: { title: 'Tema', description: "Escolha uma cor.", blue: 'Azul', green: 'Verde', purple: 'Roxo', orange: 'Laranja' } },
   },
 };

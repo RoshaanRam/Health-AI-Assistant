@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+
+import React, { useState, useContext, useEffect } from 'react';
 import SymptomChecker from './components/SymptomChecker';
 import HealthTracker from './components/HealthTracker';
 import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
 import SettingsPage from './components/SettingsPage';
+import StartupScreen from './components/StartupScreen';
 import { SettingsProvider, SettingsContext } from './contexts/SettingsContext';
 import { Icon } from './components/common/Icon';
 import { useTranslations } from './hooks/useTranslations';
@@ -12,8 +14,18 @@ type View = 'home' | 'checker' | 'tracker' | 'about' | 'settings';
 
 const AppContent: React.FC = () => {
   const [view, setView] = useState<View>('home');
+  const [showStartup, setShowStartup] = useState(true);
   const { theme } = useContext(SettingsContext);
   const { t } = useTranslations();
+
+  // Prevent scrolling during startup
+  useEffect(() => {
+    if (showStartup) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [showStartup]);
 
   const NavButton: React.FC<{
     targetView: View;
@@ -52,6 +64,9 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent font-sans">
+      {/* Startup Screen Overlay */}
+      {showStartup && <StartupScreen onComplete={() => setShowStartup(false)} />}
+
       <header
         className="backdrop-blur-lg sticky top-0 z-10 shadow-themed-sm"
         style={{ background: 'var(--navbar-background)' }}

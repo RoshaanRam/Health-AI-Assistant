@@ -136,6 +136,36 @@
         background: linear-gradient(135deg, hsl(var(--primary-hue), var(--primary-saturation), 99%), hsl(var(--primary-hue), var(--primary-saturation), 95%));
       }
 
+      /* Print Styles */
+      @media print {
+        body {
+            background-image: none !important;
+            background-color: white !important;
+        }
+        header, nav, button, .no-print {
+            display: none !important;
+        }
+        .print-full-width {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+        }
+        form {
+            display: none !important;
+        }
+        #root {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        /* Ensure specific elements are visible for printing the diagnosis */
+        .diagnosis-result {
+            display: block !important;
+            break-inside: avoid;
+        }
+      }
+
     </style>
     <script type="importmap">
     {

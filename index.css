@@ -1,3 +1,4 @@
+
 .range-thumb-primary::-webkit-slider-thumb {
   background-color: var(--primary-color);
 }
@@ -24,4 +25,48 @@
 
 .text-primary-dark {
     color: var(--primary-color-dark);
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-entrance {
+  animation: fadeInScale 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 1.5s ease-in-out forwards;
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 3s infinite ease-in-out;
 }
